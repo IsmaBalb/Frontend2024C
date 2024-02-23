@@ -5,7 +5,7 @@ const operatorButtonsClasses = 'btn btn-outline-warning w-100'
 const specialButtonsClasses = 'btn btn-outline-danger'
 
 function App(){
-    const [display, setDisplay] = useState({value: '0', hasPoint: false,})
+    const [display, setDisplay] = useState({value: '0', hasPoint: false, operator: '', previusValue: '0'})
 
     const updateDisplay = (value) =>{
      if (value === '.'){
@@ -40,6 +40,43 @@ function App(){
      hasPoint: false,
    })
    }
+
+   const deletelastcharacter = () => {
+    setDisplay({
+      ...display,
+      value: display.value.slice(0, -1)
+
+    })
+    if (display.value.length === 1){
+      setDisplay({
+        ...display,
+        value: '0'
+      })
+    }
+   }
+
+   const setOperator = (operator) => {
+    setDisplay({
+      ...display,
+      operator,
+      previusValue: display.value,
+      value: '0',
+      hasPoint: 'false',
+    })
+   }
+
+   const calculate = () => {
+    if (display.operator === ''){
+      return
+    }
+    setDisplay({
+      ...display,
+      operator: '',
+      hasPoint: 'false',
+      previusValue: '0',
+      value: eval(`${display.previusValue} ${display.operator} ${display.value}`),
+    })
+   }
    
     return(
     <div>
@@ -59,7 +96,7 @@ function App(){
             </td>
             <td>
             <button
-                className={operatorButtonsClasses} type= 'button'>{"<"}</button>
+                className={operatorButtonsClasses} type= 'button' onClick={deletelastcharacter}>{"<"}</button>
             </td>
             <td>
             <button
@@ -119,7 +156,7 @@ function App(){
             </td>
             <td>
             <button
-                className={operatorButtonsClasses} type= 'button'>+</button>
+                className={operatorButtonsClasses} type= 'button' onClick={() => setOperator('+')}>+</button>
             </td>
            </tr>
            <tr>
@@ -133,7 +170,7 @@ function App(){
             </td>
             <td>
             <button
-                className={specialButtonsClasses} type= 'button'>=</button>
+                className={specialButtonsClasses} type= 'button' onClick={calculate}>=</button>
             </td>
 
            </tr>
