@@ -14,7 +14,7 @@ function App(){
         }
         setDisplay({
           ...display,
-          value: display.value + value,
+          value: limit (display.value + value),
           hasPoint: true,
         })
         return 
@@ -28,7 +28,7 @@ function App(){
       }
       setDisplay({
         ...display,
-        value: display.value + value,
+        value: limit (display.value + value),
         
       })
        
@@ -84,17 +84,30 @@ function App(){
       eval(display.previousValue + '/100*' + display.value):
       eval(display.previousValue +   display.operator + display.value)
       
-    
+      result = result + ""
+
       setDisplay({
         ...display,
         operator: '',
-        hasPoint: false,
+        hasPoint: result.includes("."),
         previousValue: '0',
-        value: result + '',
+        value: limit (result),
        
       })
     }
+
+    const limit = (string = '', length = 10) =>{
+      return string.slice(0, length)
+    }
    
+    const buttonsFunctions = {
+      updateDisplay,
+      clearDisplay,
+      deleteLastCharacter,
+      setOperator,
+      calculate,
+    }
+
     return(
     <div>
       <h1>Calculator</h1>
@@ -109,11 +122,11 @@ function App(){
            <tr>
             <td>
               <button
-                className={operatorButtonsClasses} type= 'button' onClick={clearDisplay}>C</button>  
+                className={specialButtonsClasses} type= 'button' onClick={clearDisplay}>C</button>  
             </td>
             <td>
             <button
-                className={operatorButtonsClasses} type= 'button' onClick={deleteLastCharacter}>{"<"}</button>
+                className={specialButtonsClasses} type= 'button' onClick={deleteLastCharacter}>{"<"}</button>
             </td>
             <td>
             <button
