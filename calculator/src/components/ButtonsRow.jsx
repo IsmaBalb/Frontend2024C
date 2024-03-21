@@ -1,11 +1,25 @@
-import  { Button } from "./Button"
+import {Button} from "./Buttons"
 
-export const ButtonsRow = () => {
-    return(
-        <tr>
-            <td>
-               <Button /> 
-            </td>
-        </tr>
-    )
+export const ButtonsRow = ({row, buttonsFunctions}) => {
+  return (
+    <tr>
+      {
+         row.map((button) =>{
+          return(
+            <Button
+            key={button.label}
+            buttonsFunctions={buttonsFunctions}
+            {...button}
+            />
+          )
+         })
+      }
+
+    </tr>
+  )
+}
+
+ButtonsRow.prototype = {
+  row: 'array',
+  buttonsFunctions: 'object',
 }
