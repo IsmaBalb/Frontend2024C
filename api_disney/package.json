@@ -1,5 +1,5 @@
 {
-  "name": "todo-list",
+  "name": "api_disney",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,10 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sweetalert2": "^11.10.8"
+    "sweetalert2": "^11.11.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
